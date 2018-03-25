@@ -16,7 +16,7 @@ input:
 	li $v0, 12
  	syscall
 	beq $v0, '?', goend
- 	la $s1, buffera
+ 	la $s1, buffer
  	li $t0, 0
 
 loop:  
