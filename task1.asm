@@ -79,8 +79,5 @@ others:
 	j main
 	
 goend:	
-	li $v0, 4	
-	la $a0, name_id	
-	syscall	
 	li $v0, 10	
 	syscall
