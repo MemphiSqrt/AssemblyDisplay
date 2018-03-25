@@ -8,19 +8,22 @@ name_id:	.asciiz "\r\nname: Tao Yuanzheng. id:1600012799"
 	.text 	
 	.globl main
 main:	
+	# read the char
 	li $v0, 12	
 	syscall	
+	
+	# end or not
 	beq $v0, '?', goend	
 	sub $t1, $v0, 48	
 	slt $s0, $t1, $0	
 	bne $s0, $0, others	
 	
-	# number	
+	# number or not	
 	sub $t2, $t1, 10	
 	slt $s1, $t2, $0	
 	bne $s1, $0, getnum	
 	
-	# capital	
+	# capital or not
 	sub $t2, $v0, 91	
 	slt $s1, $t2, $0	
 	sub $t2, $v0, 64	
@@ -28,7 +31,7 @@ main:
 	and $s0, $s1, $s2	
 	bne $s0, $0, printlist	
 	
-	# lower case	
+	# lower case or not
 	sub $t2, $v0, 123	
 	slt $s1, $t2, $0	
 	sub $t2, $v0, 96	
@@ -48,6 +51,7 @@ getnum:
 	syscall	
 	j main
 	
+	# print capital answer
 printlist:	
 	sub $t2, $t2, 1	
 	sll $t2, $t2, 2	
@@ -60,6 +64,7 @@ printlist:
 	syscall	
 	j main
 	
+	# print lower case answer
 printlist2:	
 	sub $t2, $t2, 1	
 	sll $t2, $t2, 2	
@@ -72,12 +77,14 @@ printlist2:
 	syscall	
 	j main
 	
+	# print other answer
 others:	
 	li $a0, 42	
 	li $v0, 11	
 	syscall	
 	j main
 	
+	# end the program
 goend:	
 	li $v0, 10	
 	syscall
